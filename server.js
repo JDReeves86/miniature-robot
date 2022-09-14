@@ -31,6 +31,7 @@ app.post('/api/notes', (req, res) => {
     }
     
     const fileData = JSON.parse(fs.readFileSync('./db/db.json'))
+
     fileData.push(saved)
     
     const fileString = JSON.stringify(fileData)
