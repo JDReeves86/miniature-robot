@@ -3,6 +3,7 @@ const fs = require('fs');
 const app = express();
 const PORT = process.env.PORT || 3001;
 const path = require('path');
+const uuid = require('./helpers/uuid');
 const db = require('./db/db.json');
 
 console.log(__dirname)
@@ -28,6 +29,7 @@ app.post('/api/notes', (req, res) => {
     const saved = {
         title,
         text,
+        id: uuid(),
     }
     
     const fileData = JSON.parse(fs.readFileSync('./db/db.json'))
@@ -39,10 +41,12 @@ app.post('/api/notes', (req, res) => {
     fs.writeFile(`./db/db.json`, fileString, (err) => {
             if (err) console.log('something went wrong', err)
         })
+
+    res.json(saved)
 })
 
 app.delete('/api/notes/:id', (req, res) => {
-    console.log(req.id)
+    console.log(req.params.id)
 })
 
 
