@@ -41,6 +41,10 @@ app.post('/api/notes', (req, res) => {
         })
 })
 
+app.delete('/api/notes/:id', (req, res) => {
+    console.log(req.id)
+})
+
 
 app.listen(PORT, () => {
     console.log(`Listening at http://localhost:${PORT}`)
