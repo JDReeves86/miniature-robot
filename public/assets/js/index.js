@@ -51,7 +51,7 @@ const deleteNote = (id) =>
     },
   });
 
-const renderActiveNote = (activeNote) => {
+const renderActiveNote = () => {
   hide(saveNoteBtn);
 
   // console.log(activeNote)
@@ -77,7 +77,7 @@ const handleNoteSave = (ev) => {
   };
   saveNote(newNote).then(() => {
     getAndRenderNotes();
-    renderActiveNote(newNote);
+    renderActiveNote();
   });
 };
 
@@ -89,7 +89,7 @@ const handleNoteDelete = (e) => {
   const note = e.target;
   const noteId = JSON.parse(note.parentElement.getAttribute('data-note')).id;
 
-  console.log(noteId)
+  // console.log(noteId)
 
   if (activeNote.id === noteId) {
     activeNote = {};
@@ -125,6 +125,7 @@ const handleRenderSaveBtn = () => {
 // Render the list of note titles
 const renderNoteList = async (notes) => {
   let jsonNotes = await notes.json();
+  console.log(jsonNotes)
   if (window.location.pathname === '/notes') {
     noteList.forEach((el) => (el.innerHTML = ''));
   }
@@ -177,7 +178,7 @@ const renderNoteList = async (notes) => {
 };
 
 // Gets notes from the db and renders them to the sidebar
-const getAndRenderNotes = () => getNotes().then(renderNoteList);
+const getAndRenderNotes = () => getNotes().then((r) => {renderNoteList(r)});
 
 if (window.location.pathname === '/notes') {
   saveNoteBtn.addEventListener('click', handleNoteSave);

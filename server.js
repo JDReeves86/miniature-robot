@@ -6,7 +6,7 @@ const path = require('path');
 const uuid = require('./helpers/uuid');
 const db = require('./db/db.json');
 
-console.log(__dirname)
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -21,7 +21,8 @@ app.get('/notes', (req, res) => {
 });
 
 app.get('/api/notes', (req,res) => {
-    res.json(db)
+    res.json(db) 
+    // fs read and parse to ensure updated information is called each time.
 });
 
 app.post('/api/notes', (req, res) => {
@@ -32,21 +33,35 @@ app.post('/api/notes', (req, res) => {
         id: uuid(),
     }
     
+    const response = {
+        status: 'success',
+        body: saved
+    }
+
+ 
+
     const fileData = JSON.parse(fs.readFileSync('./db/db.json'))
-
     fileData.push(saved)
-    
     const fileString = JSON.stringify(fileData)
-
     fs.writeFile(`./db/db.json`, fileString, (err) => {
             if (err) console.log('something went wrong', err)
         })
 
+    console.log(saved)
+    // sedn arr or note
     res.json(saved)
 })
 
 app.delete('/api/notes/:id', (req, res) => {
-    console.log(req.params.id)
+    const clicked = req.params.id
+    let objIndex = db.findIndex(obj => obj.id === clicked)
+    const fileData = JSON.parse(fs.readFileSync('./db/db.json'))
+    fileData.splice(objIndex, 1)
+    const fileString = JSON.stringify(fileData)
+    fs.writeFile(`./db/db.json`, fileString, (err) => {
+        if (err) console.log('something went wrong', err)
+    })
+    res.sendFile(path.join(__dirname, './public/notes.html'))
 })
 
 
