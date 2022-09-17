@@ -1,3 +1,126 @@
+# Challenge 10 - miniature-robot
+
+
+## Note Taker
+
+---
+
+### Contents 
+
+---
+
+1. Objectives
+2. About
+3. Screenshots
+4. Links
+5. Assignment details & grading rubric (*ignore me*)
+
+<br>
+<br>
+
+### Objectives ###
+
+---
+
+<br>
+
+1. WHEN a user opens the Note Taker, they are presented with a landing page with a link to a notes page.
+2. WHEN the link to the notes page is clicked, the user is presented with a page with existing notes listed in the left-hand column, plus empty fields to enter a new note title and the note’s text in the right-hand column.
+3. WHEN a new note title and the note’s text are entered, THEN a Save icon appears in the navigation at the top of the page.
+4. WHEN the Save icon is clicked, THEN the new note is saved and appears in the left-hand column with the other existing notes.
+5. WHEN an existing note is clicked in the list in the left-hand column. THEN that note appears in the right-hand column.
+6. WHEN a user clicks on the Write icon in the navigation at the top of the page, THEN they are presented with empty fields to enter a new note title and the note’s text in the right-hand column.
+
+<br>
+<br>
+
+### About ###
+
+---
+
+<br>
+
+1. WHEN a user opens the Note Taker, they are presented with a landing page with a link to a notes page.
+    > When the app is opened, the user is presented with a landing page that allows the user to click a 'Get Started' button. Clicking this button takes the user to the actual notes page where they may take notes.
+
+<br>
+
+2. WHEN the link to the notes page is clicked, the user is presented with a page with existing notes listed in the left-hand column, plus empty fields to enter a new note title and the note’s text in the right-hand column.
+    > Once the 'Get Started' button is clicked, the user is taken to the notes page where they are able to write notes and save them. The left hand column shows saved notes and the right column si the active note field where the user can edit and create notes. 
+
+<br>
+
+3. WHEN a new note title and the note’s text are entered, THEN a Save icon appears in the navigation at the top of the page.
+    > Once a user enters a title and a note body, a 'keyup' event is triggered that calls the function to render the save icon in the top right hand corner of the page.
+<br>
+
+4. WHEN the Save icon is clicked, THEN the new note is saved and appears in the left-hand column with the other existing notes.
+    > Once the save icon is clicked a post request is sent to the api/notes page where the file db.json is accessed. Once accessed the current data in db.json is read, the newly constructed note object is pushed into the array of existing notes objects. After the new notes objec tis pushed into the array, the db.json file is then re-written using the new array including the newly saved notes objects. During the process each note is given a 4 digit uuid.
+
+<br>
+
+5. WHEN an existing note is clicked in the list in the left-hand column. THEN that note appears in the right-hand column.
+    >  Each note id given a uuid that is used to check to see if one is present. If present the note is populated in the right column and is set to read-only. If not present then an empty note is placed in the right hand column to alow the user to write a new note. Future iterations could remove the read-only functionality to allow users to edit existing notes.
+<br>
+
+6. WHEN a user clicks on the Write icon in the navigation at the top of the page, THEN they are presented with empty fields to enter a new note title and the note’s text in the right-hand column.
+	> Once the write icon (signified by a plus sign) is clicked, the right hand column is emptied and the user may enter a new note. When viewing an existing note, if th euser wishes to write  new note they mush click this icon as the currently displayed note will be read-only.
+<br>
+<br>
+
+### Screenshots ###
+
+---
+
+<br>
+
+![myscreenshot](./Assets/Screenshot1.png)
+
+<br>
+
+![myscreenshot](./Assets/Screenshot2.png)
+
+<br>
+
+### Links ###
+
+---
+
+<br>
+
+
+Link to Github repo: https://github.com/JDReeves86/miniature-robot
+
+Link to deployed app on Heroku: https://pacific-island-12555.herokuapp.com/notes
+
+
+Link to video demo: https://drive.google.com/file/d/140BZFZrI87bpoizZrrCax7xJ9p5gqquH/view
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+---
+
+---
+
+## Assignment Details & Grading Rubric ##
+
+---
+
+---
+
+<br>
+<br>
+
+
 # 11 Express.js: Note Taker
 
 ## Your Task
