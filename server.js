@@ -21,8 +21,9 @@ app.get('/notes', (req, res) => {
 });
 
 app.get('/api/notes', (req,res) => {
-    res.json(db) 
-    // fs read and parse to ensure updated information is called each time.
+    const data = JSON.parse(fs.readFileSync('./db/db.json'))
+    res.json(data) 
+ 
 });
 
 app.post('/api/notes', (req, res) => {
@@ -38,7 +39,6 @@ app.post('/api/notes', (req, res) => {
         body: saved
     }
 
- 
 
     const fileData = JSON.parse(fs.readFileSync('./db/db.json'))
     fileData.push(saved)
@@ -47,21 +47,21 @@ app.post('/api/notes', (req, res) => {
             if (err) console.log('something went wrong', err)
         })
 
-    console.log(saved)
-    // sedn arr or note
-    res.json(saved)
+    res.json(db)
 })
 
 app.delete('/api/notes/:id', (req, res) => {
-    const clicked = req.params.id
-    let objIndex = db.findIndex(obj => obj.id === clicked)
     const fileData = JSON.parse(fs.readFileSync('./db/db.json'))
+    const clicked = req.params.id
+    let objIndex = fileData.findIndex(obj => {return obj.id === clicked})
+    
+    console.log(fileData, objIndex)
     fileData.splice(objIndex, 1)
     const fileString = JSON.stringify(fileData)
     fs.writeFile(`./db/db.json`, fileString, (err) => {
         if (err) console.log('something went wrong', err)
     })
-    res.sendFile(path.join(__dirname, './public/notes.html'))
+    res.json(db)
 })
 
 
