@@ -91,7 +91,7 @@
 
 Link to Github repo: https://github.com/JDReeves86/miniature-robot
 
-Link to deployed app on Heroku: https://pacific-island-12555.herokuapp.com/notes
+Link to deployed app on Heroku: https://pacific-island-12555.herokuapp.com/
 
 
 <br>
